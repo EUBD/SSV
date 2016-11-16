@@ -15,14 +15,35 @@ public class STree implements ISTree {
         currentNode = headNode;
     }
 
-    @Override
-    public void SetNewNode(SNode node) {
 
+    @Override
+    public void newLvl(String name) {
+
+        currentNode = new SNode(name,currentNode);
     }
 
     @Override
-    public boolean addToTree(SNode paren, SNode child) {
-        return false;
+    public boolean add(String name, int lvl) {
+
+        if(lvl > currentNode.getLvl()){
+
+            newLvl(name);
+
+
+        }else{
+
+            if(upToLevel(lvl-1))
+            {
+                newLvl(name);
+            }
+            else {
+                return false;
+            }
+
+        }
+
+
+        return true;
     }
 
     @Override
@@ -31,7 +52,14 @@ public class STree implements ISTree {
     }
 
     @Override
-    public void upToLevel(int lvl) {
+    public boolean upToLevel(int lvl) {
 
+        while (currentNode.getLvl() != lvl)
+        {
+            currentNode = currentNode.getParent();
+
+        }
+
+        return true;
     }
 }

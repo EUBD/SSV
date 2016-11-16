@@ -15,6 +15,9 @@ public interface IBuilderSignaturs {
 
 
 
+            public SNode DeObfuscation(SNode node);
+
+            public boolean CompareSignature(STree tree);
 
             public void SaveFile();
 

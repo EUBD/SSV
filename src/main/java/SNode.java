@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -6,28 +7,45 @@ import java.util.List;
 public class SNode implements ISNode {
 
     private SNode parent;
+
     private List<SNode> children;
     private String name;
+    private int lvl;
     private double weight;
     private int Maxheight;
-    private int quantity;
-
+    private int quantityChildren;
     SNode(){
+        children = new ArrayList<SNode>();
         weight = 0;
         Maxheight = 0;
-        quantity = 0;
+        quantityChildren = 0;
+        lvl = 0;
         name = "Head";
     }
 
     SNode(String name,SNode parent){
-
+        children = new ArrayList<SNode>();
         this.name = name;
         this.parent = parent;
+        parent.addChild(this);
+        this.lvl = parent.getLvl()+1;
     }
+
+
+
+    public SNode getParent() {
+        return parent;
+    }
+
+
+    public int getLvl() {
+        return lvl;
+    }
+
 
     @Override
     public void incQuantity() {
-        quantity+=0.1;
+        quantityChildren+=0.1;
         refreshValue();
 
     }
@@ -43,13 +61,12 @@ public class SNode implements ISNode {
 
     @Override
     public void addChild(SNode child) {
-        child.parent = this;
         children.add(child);
     }
 
     private void refreshValue()
     {
-        weight = Maxheight*quantity+0.1;
+        weight = Maxheight*quantityChildren+0.1;
     }
 
 }

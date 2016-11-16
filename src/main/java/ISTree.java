@@ -7,10 +7,10 @@ public interface ISTree {
 
 
 
-    void SetNewNode(SNode node);
-    boolean addToTree(SNode paren,SNode child);
+    void newLvl(String name);
+    boolean add(String name, int lvl);
     SNode getNodeByIndex(int index);
-    void upToLevel(int lvl);
+    boolean upToLevel(int lvl);
 
 
 
