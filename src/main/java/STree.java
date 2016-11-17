@@ -1,8 +1,5 @@
 import java.util.List;
 
-/**
- * Created by den on 11/14/16.
- */
 public class STree implements ISTree {
 
 
@@ -56,6 +53,7 @@ public class STree implements ISTree {
 
         while (currentNode.getLvl() != lvl)
         {
+            currentNode.uplvl();
             currentNode = currentNode.getParent();
 
         }

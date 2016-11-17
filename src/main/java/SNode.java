@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by den on 11/11/16.
- */
 public class SNode implements ISNode {
 
     private SNode parent;
@@ -12,8 +9,8 @@ public class SNode implements ISNode {
     private String name;
     private int lvl;
     private double weight;
-    private int Maxheight;
-    private int quantityChildren;
+    private double Maxheight;
+    private double quantityChildren;
     SNode(){
         children = new ArrayList<SNode>();
         weight = 0;
@@ -45,28 +42,36 @@ public class SNode implements ISNode {
 
     @Override
     public void incQuantity() {
-        quantityChildren+=0.1;
+        quantityChildren++;
         refreshValue();
 
     }
 
     @Override
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         if(height>Maxheight) {
             this.Maxheight = height;
-            refreshValue();
-        }
 
+        }
+        refreshValue();
     }
 
     @Override
     public void addChild(SNode child) {
+        incQuantity();
         children.add(child);
+    }
+
+    @Override
+    public void uplvl() {
+        double newMaxHeight = Maxheight+1;
+        parent.setHeight(newMaxHeight);
+        refreshValue();
     }
 
     private void refreshValue()
     {
-        weight = Maxheight*quantityChildren+0.1;
+        weight = Maxheight*quantityChildren+1;
     }
 
 }

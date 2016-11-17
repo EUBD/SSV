@@ -1,8 +1,5 @@
 import java.util.List;
 
-/**
- * Created by den on 11/11/16.
- */
 public interface ISTree {
 
 

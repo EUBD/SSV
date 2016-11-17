@@ -1,5 +1,7 @@
-// Generated from /home/den/IdeaProjects/SSV/ECMAScript.g4 by ANTLR 4.5.3
+package gen;// Generated from /home/den/IdeaProjects/SSV/ECMAScript.g4 by ANTLR 4.5.3
 import org.antlr.v4.runtime.tree.ParseTreeListener;
+import gen.*;
+
 
 /**
  * This interface defines a complete listener for a parse tree produced by

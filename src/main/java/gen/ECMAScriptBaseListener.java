@@ -1,5 +1,7 @@
-// Generated from /home/den/IdeaProjects/SSV/ECMAScript.g4 by ANTLR 4.5.3
+package gen;// Generated from /home/den/IdeaProjects/SSV/ECMAScript.g4 by ANTLR 4.5.3
 
+import gen.ECMAScriptListener;
+import gen.ECMAScriptParser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;

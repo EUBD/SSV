@@ -1,6 +1,4 @@
-/**
- * Created by den on 11/11/16.
- */
+
 public interface IBuilderSignaturs {
 
 
@@ -14,10 +12,6 @@ public interface IBuilderSignaturs {
             * */
 
 
-
-            public SNode DeObfuscation(SNode node);
-
-            public boolean CompareSignature(STree tree);
 
             public void SaveFile();
 

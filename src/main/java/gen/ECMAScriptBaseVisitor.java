@@ -1,5 +1,6 @@
-// Generated from /home/den/IdeaProjects/SSV/ECMAScript.g4 by ANTLR 4.5.3
+package gen;// Generated from /home/den/IdeaProjects/SSV/ECMAScript.g4 by ANTLR 4.5.3
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
+import gen.*;
 
 /**
  * This class provides an empty implementation of {@link ECMAScriptVisitor},
