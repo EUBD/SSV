@@ -6,14 +6,19 @@ public class Deobfuskator implements IDeobfuskator,IContextDeobfuscator {
     private StringBuilder deobfuscatetext;
     //String[] _IGNORE_SUMBOL = {};
 
-            String[] _LITERAL_NAMES = {
-            "null","break", "do", "instanceof","+",
-            "typeof", "case", "else", "new", "var", "catch", "finally",
-            "return", "void", "continue", "for", "switch", "while", "debugger",
-            "function", "this", "with", "default", "if", "throw", "delete",
-            "in", "try", "class", "enum", "extends", "super", "const",
-            "export", "import", "eval","alert", "replace" , "split","program"
-    };
+            String[] _LITERAL_NAMES = { "[", "]", "(", ")", "{", "}", ";", ",",
+                    "=", "?", ":", ".", "++", "--", "+", "-", "~", "!",
+                    "*", "/", "%", ">>", "<<", ">>>", "<", ">", "<=", ">=",
+                    "==", "!=", "===", "!==", "&", "^", "|", "&&", "||",
+                    "*=", "/=", "%=", "+=", "-=", "<<=", ">>=", ">>>=", "&=",
+                    "^=", "|=","null","break", "do", "instanceof",
+                    "typeof", "case", "else", "new", "var", "catch", "finally",
+                    "return", "void", "continue", "for", "switch", "while", "debugger",
+                    "function", "this", "with", "default", "if", "throw", "delete",
+                    "in", "try", "class", "enum", "extends", "super", "const",
+                    "export", "import", "eval","alert", "replace" , "split","program"
+
+                    };
     String[] _SYMBOLIC_NAMES = {
             "RegularExpressionLiteral", "LineTerminator", "OpenBracket", "CloseBracket",
             "OpenParen", "CloseParen", "OpenBrace", "CloseBrace", "SemiColon", "Comma",
@@ -38,13 +43,27 @@ public class Deobfuskator implements IDeobfuskator,IContextDeobfuscator {
     private final int NOLITERAL = 2;
     int BeforeType = NOLITERAL;
     boolean ready = false;
-
+    private int beforeLvl;
 
 
 
     @Override
-    public StringBuilder deobfuscateContext(StringBuilder Context) {
-        return null;
+    public void deobfuscateContext(String tree,int lvl) {
+
+        if(BeforeType == NOLITERAL || lvl != beforeLvl){
+            deobfuscatetext = new StringBuilder();
+            if(isReserName(tree)){
+                deobfuscatetext.append(tree);
+            }
+            else
+            {
+                deobfuscatetext.append("literal");
+            }
+
+            BeforeType = LITERAL;
+        }
+        ready = false;
+        beforeLvl = lvl;
     }
 
     @Override
@@ -73,41 +92,18 @@ public class Deobfuskator implements IDeobfuskator,IContextDeobfuscator {
     }
 
     @Override
-    public void Deobfuscate(String node, String tree) {
+    public void Deobfuscate(String node, String tree,int lvl) {
 
         if(GetType(node)==LITERAL)
         {
-            if(BeforeType == NOLITERAL){
-
-                if(isReserName(tree)){
-
-                    deobfuscatetext = new StringBuilder();
-                    deobfuscatetext.append(tree);
-                }
-                else
-                {
-                    deobfuscatetext = new StringBuilder();
-                    deobfuscatetext.append("literal");
-                }
-
-                BeforeType = LITERAL;
-            }
-            ready = false;
+            deobfuscateContext(tree,lvl);
         }
         else
         {
-            try {
-                beforeDeobfuscatetext = new StringBuilder();
-                beforeDeobfuscatetext.append(deobfuscatetext);
-
-                ready = true;
-            }catch (NullPointerException e)
-            {
-                ready = false;
-            }
-            deobfuscatetext = new StringBuilder();
-            deobfuscatetext.append(node);
+            beforeDeobfuscatetext = new StringBuilder(deobfuscatetext == null ? "Signature" : deobfuscatetext);
+            deobfuscatetext = new StringBuilder(node);
             BeforeType = NOLITERAL;
+            ready = true;
         }
 
     }

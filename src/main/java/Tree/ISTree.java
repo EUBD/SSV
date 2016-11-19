@@ -1,4 +1,4 @@
-import java.util.List;
+package Tree;
 
 public interface ISTree {
 

@@ -1,3 +1,5 @@
+import Tree.STree;
+
 import static org.junit.Assert.*;
 
 /**
