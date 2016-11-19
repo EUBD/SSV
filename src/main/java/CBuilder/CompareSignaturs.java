@@ -12,6 +12,6 @@ public class CompareSignaturs implements ICompareSignaturs {
 
     @Override
     public boolean Compare(STree one, STree two) throws IOException {
-        return false;
+        return true;
     }
 }

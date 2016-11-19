@@ -2,7 +2,7 @@ package CBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -46,25 +46,25 @@ public class Separation {
 
     }
 
-    private File CreateFolder(String name)
+    private File CreatePath(String folderName,String fileName)
     {
-        File createFolder = new File(ResultFolder+"/"+name);
+        File createFolder = new File(ResultFolder+"/"+folderName);
+
         if(!createFolder.exists())
         {
-            if(!createFolder.mkdir())
-            {
-                return null;
+            if(!createFolder.mkdir()){
+
             }
         }
-        else
-        {
-            return null;
-        }
-        return createFolder;
+
+        File path =  new File(ResultFolder+"/"+folderName+"/"+fileName);
+        return path;
     }
 
-    private boolean move(File to,File file)
+    private boolean move(File file,File to)
     {
+
+
         if(!file.renameTo(to)){
             return false;
         }
@@ -78,19 +78,32 @@ public class Separation {
     }
 
     public void startSeparation() throws IOException {
-
+        Integer count = 0;
         for (Signature signature: SignatureList) {
+            count = 0;
             if(!signature.ismove())
             {
                 if(signature.getTree() == null)
                     buildTree(signature);
+                for (Signature Comsignature : SignatureList){
+                    if(!signature.ismove()) {
+                        if (signature.getTree() == null)
+                            buildTree(signature);
+                        if(comparer.Compare(signature.getTree(),Comsignature.getTree()))
+                        {
+                            count++;
+                            move(Comsignature.getFile(), CreatePath(count.toString(),Comsignature.getName()));
+                            Comsignature.setIsmove(true);
+                        }
+                    }
+
+                }
             }
 
 
         }
 
     }
-
 
 
 
