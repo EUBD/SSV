@@ -93,7 +93,7 @@ public class Separation {
                 for (Signature Comsignature : SignatureList){
                     if(!Comsignature.ismove()) {
                         if (Comsignature.getTree() == null)
-                            buildTree(signature);
+                            buildTree(Comsignature);
                         if(comparer.Compare(signature.getTree(),Comsignature.getTree()))
                         {
                            Comsignature.setFile(move(Comsignature.getFile(),

@@ -10,9 +10,11 @@ public class SNode implements ISNode {
     private List<SNode> children;
     private String name;
     private int lvl;
-    private double weight;
-    private double Maxheight;
-    private double quantityChildren;
+
+
+    private int weight;
+    private int Maxheight;
+    private int quantityChildren;
     SNode(){
         children = new ArrayList<SNode>();
         weight = 0;
@@ -30,6 +32,9 @@ public class SNode implements ISNode {
         this.lvl = parent.getLvl()+1;
     }
 
+    public int getWeight() {
+        return weight;
+    }
 
 
     public SNode getParent() {
@@ -50,7 +55,7 @@ public class SNode implements ISNode {
     }
 
     @Override
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         if(height>Maxheight) {
             this.Maxheight = height;
 
@@ -66,7 +71,7 @@ public class SNode implements ISNode {
 
     @Override
     public void uplvl() {
-        double newMaxHeight = Maxheight+1;
+        int newMaxHeight = Maxheight+1;
         parent.setHeight(newMaxHeight);
         refreshValue();
     }

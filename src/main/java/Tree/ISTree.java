@@ -8,6 +8,7 @@ public interface ISTree {
     boolean add(String name, int lvl);
     SNode getNodeByIndex(int index);
     boolean upToLevel(int lvl);
+    int getEpsilon();
 
 
 
