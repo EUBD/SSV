@@ -61,15 +61,15 @@ public class Separation {
         return path;
     }
 
-    private boolean move(File file,File to)
+    private File move(File file,File to)
     {
 
-
         if(!file.renameTo(to)){
-            return false;
+            return null;
         }
 
-        return true;
+
+        return to;
     }
 
     private void buildTree(Signature signature)
@@ -80,19 +80,25 @@ public class Separation {
     public void startSeparation() throws IOException {
         Integer count = 0;
         for (Signature signature: SignatureList) {
-            count = 0;
+            count++;
             if(!signature.ismove())
             {
+               signature.setFile(move(signature.getFile(),
+                                        CreatePath(count.toString(),
+                                        signature.getName())));
+
+                signature.setIsmove(true);
                 if(signature.getTree() == null)
                     buildTree(signature);
                 for (Signature Comsignature : SignatureList){
-                    if(!signature.ismove()) {
-                        if (signature.getTree() == null)
+                    if(!Comsignature.ismove()) {
+                        if (Comsignature.getTree() == null)
                             buildTree(signature);
                         if(comparer.Compare(signature.getTree(),Comsignature.getTree()))
                         {
-                            count++;
-                            move(Comsignature.getFile(), CreatePath(count.toString(),Comsignature.getName()));
+                           Comsignature.setFile(move(Comsignature.getFile(),
+                                                        CreatePath(count.toString(),
+                                                        Comsignature.getName())));
                             Comsignature.setIsmove(true);
                         }
                     }
