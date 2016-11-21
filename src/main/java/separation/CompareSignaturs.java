@@ -12,13 +12,14 @@ public class CompareSignaturs implements ICompareSignaturs {
     @Override
     public boolean Compare(STree one, STree two) throws IOException {
         epsilon = one.getEpsilon() < two.getEpsilon() ? one.getEpsilon()  : two.getEpsilon();
+        int localEplsilon = epsilon;
         System.out.print(epsilon);
         System.out.print("\n");
-        compareNode(one.getHeadNode(),two.getHeadNode());
-        if(epsilon<0)
+
+        if(!compareNode(one.getHeadNode(),two.getHeadNode()))
             return false;
         else
-            epsilon = one.getEpsilon() < two.getEpsilon() ? one.getEpsilon()  : two.getEpsilon();
+            epsilon = localEplsilon;
             return compareNode(two.getHeadNode(),one.getHeadNode());
     }
 
