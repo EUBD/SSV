@@ -84,11 +84,16 @@ public class SNode implements ISNode {
     @Override
     public SNode nextChild() {
         if(currentChildIndex>=children.size()){
+            currentChildIndex = 0;
             return null;
         }
         SNode child = children.get(currentChildIndex);
         currentChildIndex++;
         return child;
+    }
+
+    public void refreshNext(){
+        currentChildIndex = 0;
     }
 
     @Override

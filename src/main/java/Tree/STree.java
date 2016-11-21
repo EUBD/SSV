@@ -76,6 +76,7 @@ public class STree implements ISTree {
         upToLevel(0);
         float Fdelta = QAllNodes/QSheet;
         int delta = (int)Math.ceil(Fdelta);
+
         int epsilon = (int)Math.ceil((float)maxWeight/delta);
         return epsilon < 1 ? 1 : epsilon;
     }

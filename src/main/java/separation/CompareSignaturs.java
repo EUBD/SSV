@@ -12,8 +12,14 @@ public class CompareSignaturs implements ICompareSignaturs {
     @Override
     public boolean Compare(STree one, STree two) throws IOException {
         epsilon = one.getEpsilon() < two.getEpsilon() ? one.getEpsilon()  : two.getEpsilon();
-
-        return compareNode(one.getHeadNode(),two.getHeadNode());
+        System.out.print(epsilon);
+        System.out.print("\n");
+        compareNode(one.getHeadNode(),two.getHeadNode());
+        if(epsilon<0)
+            return false;
+        else
+            epsilon = one.getEpsilon() < two.getEpsilon() ? one.getEpsilon()  : two.getEpsilon();
+            return compareNode(two.getHeadNode(),one.getHeadNode());
     }
 
     private boolean compareNode(SNode one, SNode two)
@@ -27,6 +33,8 @@ public class CompareSignaturs implements ICompareSignaturs {
 
         int SubWeight = one.getWeight()>two.getWeight() ? one.getWeight() : two.getWeight();
         if(one.genName().equals(two.genName())){
+            one.refreshNext();
+            two.refreshNext();
             SNode childOne = one.nextChild();
             while(childOne != null)
             {
