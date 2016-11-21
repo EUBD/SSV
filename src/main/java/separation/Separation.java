@@ -1,11 +1,12 @@
-package CBuilder;
+package separation;
+
+import CBuilder.Builder;
 
 import java.io.File;
 import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Created by den on 11/19/16.

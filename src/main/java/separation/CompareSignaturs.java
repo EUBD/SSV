@@ -1,4 +1,4 @@
-package CBuilder;
+package separation;
 
 import Tree.SNode;
 import Tree.STree;
