@@ -10,7 +10,7 @@ public class SNode implements ISNode {
     private List<SNode> children;
     private String name;
     private int lvl;
-
+    private int currentChildIndex;
 
     private int weight;
     private int Maxheight;
@@ -74,6 +74,30 @@ public class SNode implements ISNode {
         int newMaxHeight = Maxheight+1;
         parent.setHeight(newMaxHeight);
         refreshValue();
+    }
+
+    @Override
+    public String genName() {
+        return name;
+    }
+
+    @Override
+    public SNode nextChild() {
+        if(currentChildIndex>=children.size()){
+            return null;
+        }
+        SNode child = children.get(currentChildIndex);
+        currentChildIndex++;
+        return child;
+    }
+
+    @Override
+    public boolean isChildrenEmpty() {
+        if(children.isEmpty())
+        {
+            return true;
+        }
+        return false;
     }
 
     private void refreshValue()

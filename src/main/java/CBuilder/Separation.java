@@ -83,17 +83,32 @@ public class Separation {
             count++;
             if(!signature.ismove())
             {
-               signature.setFile(move(signature.getFile(),
+                signature.setFile(move(signature.getFile(),
                                         CreatePath(count.toString(),
                                         signature.getName())));
 
                 signature.setIsmove(true);
                 if(signature.getTree() == null)
-                    buildTree(signature);
+
+                    try {
+                        buildTree(signature);
+                    }catch (RuntimeException e){
+                        continue;
+                    }
+
                 for (Signature Comsignature : SignatureList){
                     if(!Comsignature.ismove()) {
                         if (Comsignature.getTree() == null)
-                            buildTree(Comsignature);
+
+                            try {
+                                buildTree(Comsignature);
+                            }catch (RuntimeException e){
+
+                                Comsignature.setIsmove(true);
+                                continue;
+
+                            }
+
                         if(comparer.Compare(signature.getTree(),Comsignature.getTree()))
                         {
                            Comsignature.setFile(move(Comsignature.getFile(),

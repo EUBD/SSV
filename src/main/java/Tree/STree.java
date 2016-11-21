@@ -4,9 +4,11 @@ package Tree;
 public class STree implements ISTree {
 
 
-    public SNode headNode;
+
+    private SNode headNode;
     public SNode currentNode;
     private int QSheet;
+    private int QAllNodes;
     private int maxWeight;
 
 
@@ -42,7 +44,7 @@ public class STree implements ISTree {
 
         }
 
-
+        QAllNodes++;
         return true;
     }
 
@@ -72,7 +74,15 @@ public class STree implements ISTree {
     @Override
     public int getEpsilon() {
         upToLevel(0);
-        int epsilon = maxWeight / QSheet;
+        float Fdelta = QAllNodes/QSheet;
+        int delta = (int)Math.ceil(Fdelta);
+        int epsilon = (int)Math.ceil((float)maxWeight/delta);
         return epsilon < 1 ? 1 : epsilon;
     }
+
+    public SNode getHeadNode() {
+        return headNode;
+    }
+
+
 }

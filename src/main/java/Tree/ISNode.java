@@ -6,5 +6,8 @@ public interface ISNode {
     void setHeight(int height);
     void addChild(SNode child);
     void uplvl();
+    String genName();
+    SNode nextChild();
+    boolean isChildrenEmpty();
 
 }
